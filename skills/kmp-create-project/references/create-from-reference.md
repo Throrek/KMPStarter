@@ -68,13 +68,53 @@ Android application ID, Xcode bundle ID, framework bundleId, project/app labels.
 Keep `StarterShared` and its Swift imports together. Change only app identity;
 references to the source kit must continue to identify **kmp-starter**.
 
-The new AGENTS.md owns local rules. Remove its kit-maintenance section and update
-article/note-specific examples and doc paths; storage rules apply only if storage
-is added. The new handoff doc points to the matching complete kit's skills and
-canonical map, without requiring this author's absolute path. Ask for kit access
-if a future agent cannot read it. Record capabilities initially as `base`; add
-`networking` or `room` after their integration. Provenance is documentation, not a
-build switch or dependency. Do not claim that an uncommitted kit matches HEAD.
+The new AGENTS.md owns local rules. Replace its kit-maintenance section with the
+ongoing-development section below and update article/note-specific examples and
+doc paths; storage rules apply only if storage is added. Record capabilities
+initially as `base`; add `networking` or `room` after their integration. Provenance
+is documentation, not a build switch or dependency. Do not claim that an
+uncommitted kit matches HEAD.
+
+### Ongoing development handoff
+
+The target root `AGENTS.md` must retain the actual architecture and code-writing
+rules locally: layer ownership and dependency direction, use cases for ViewModel
+data operations, Route/Screen separation, focused functions and helper extraction,
+constants, failure/cancellation handling, shared Material components, tests and
+formatting/verification. A link to the kit is not a replacement for these rules.
+
+Include a **Starter reference for ongoing development** section in that same file
+with these instructions, adapted to the target's real documentation paths:
+
+- For implementation, bug fixes and refactoring of application code, first read
+  this AGENTS.md, `docs/starter-kit.md` and `starter-provenance.json`. These rules
+  apply to ordinary edits as well as new features or infrastructure.
+- Resolve the matching complete kit using the recorded reference access and
+  version/revision. Read its `skills/kmp-develop-feature/SKILL.md` for feature code
+  changes, including behavior-preserving refactors. Consult relevant rows of its
+  `docs/architecture/canonical-examples.md` and the linked source/test files before
+  editing. Read only examples relevant to the change; for build or host changes,
+  consult the matching reference configuration instead.
+- Read the kit's networking or Room skill when changing the corresponding
+  capability. Follow this project's rules and product decisions when they differ
+  from the demonstration; do not import its article/note business policy.
+- If the required kit cannot be read or its recorded revision cannot be resolved,
+  report the missing reference and request access. Do not silently use another
+  version or claim to have checked unavailable examples. Independent work may
+  continue under the local rules while access is resolved.
+
+The target `docs/starter-kit.md` must explain how to locate that complete kit and
+its skills/canonical map, consistent with `starter-provenance.json`. Use a portable
+repository URL plus revision, package identity/version with its access method, or
+a documented relative checkout location; do not depend on the starter author's
+absolute filesystem path. Record actual source modifications separately. The
+handoff documents provide reference access, not automatic skill installation or a
+build dependency.
+
+Before delivery, read the generated AGENTS.md as a fresh agent would: follow its
+handoff links, resolve the recorded kit, open a relevant canonical example and
+confirm that routine refactoring is covered and local function/layer rules remain.
+Report missing access as a handoff limitation rather than claiming it is verified.
 
 Validate with the skill's checks. An app without test sources needs no invented
 tests. Keep the runnable reference and this file-selection recipe as the only

@@ -37,6 +37,15 @@ Networking and Room are independent additions. An HTTP app need not include Room
 SQLite or KSP; a local app need not include an HTTP client or INTERNET permission.
 Adding both does not prescribe cache/sync or make local screens depend on HTTP.
 
+The target app's AGENTS.md retains the architecture, layer ownership, function
+boundaries, UI, error handling, testing and formatting rules locally. Its mandatory
+ongoing-development section directs future agents through `docs/starter-kit.md`
+and `starter-provenance.json` to the matching complete kit before implementation,
+bug fixes and refactoring. Feature code changes use `kmp-develop-feature` and the
+relevant reference source/tests, including when behavior stays unchanged. Build
+and host changes consult the matching reference configuration. See the creation
+map's [handoff contract](../skills/kmp-create-project/references/create-from-reference.md#ongoing-development-handoff).
+
 The target app's AGENTS.md and product decisions govern later changes. The
 [canonical map](architecture/canonical-examples.md) links the reference code to
 behavioral tests. Article IDs, JSONPlaceholder and online-first note editing are
@@ -55,7 +64,11 @@ Record kit/version, selected capabilities and reference access in the new app's
 `starter-provenance.json`. Record the actual source revision when available and
 note local modifications; a dirty checkout does not equal its HEAD revision.
 Keep a short `docs/starter-kit.md` in that app with product decisions and how to
-find the matching kit. Provenance is a handoff record, not an installation switch.
+find the matching kit, using a repository URL/revision, an accessible versioned
+package, or a documented relative checkout location. The generated AGENTS.md must
+explicitly require reading these handoff documents for ongoing code work; their
+mere presence does not make future agents consult them. Provenance is a handoff
+record, not an installation switch.
 If the reference is unavailable, the agent should request access rather than claim
 it followed unseen examples. Do not use developer-specific absolute paths.
 

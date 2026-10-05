@@ -28,8 +28,11 @@ reference inside this repository.
    Keep the framework name `StarterShared` unless a rename was requested; its Swift
    imports and Xcode integration already agree. Keep English default resources.
 4. Adapt the source AGENTS.md to the new app: preserve general architecture,
-   constants, UI, formatting and verification rules; replace reference-only paths
-   and demo-specific instructions. Record kit/version, chosen capabilities and
+   function boundaries, constants, UI, testing, formatting and verification rules;
+   replace reference-only paths and demo-specific instructions. Include the
+   mandatory ongoing-development section described in the creation map's
+   [handoff contract](references/create-from-reference.md#ongoing-development-handoff).
+   Record kit/version, chosen capabilities and
    reference location in `starter-provenance.json`, plus product decisions and
    how to access the matching complete kit in `docs/starter-kit.md`. Record the
    actual source revision when known and disclose local modifications. Do not
