@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<lint>
+    <!-- Room's generated implementations must call its restricted runtime APIs. -->
+    <issue id="RestrictedApi">
+        <ignore path="build/generated/ksp/android/androidMain/kotlin/me/kmpstarter/data/local/StarterDatabase_Impl.kt" />
+        <ignore path="build/generated/ksp/android/androidMain/kotlin/me/kmpstarter/data/note/local/ArticleNoteDao_Impl.kt" />
+    </issue>
+</lint>

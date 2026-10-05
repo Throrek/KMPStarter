@@ -1,0 +1,21 @@
+<resources>
+    <string name="articles_title">Articles</string>
+    <string name="articles_empty">No articles.</string>
+    <string name="details_title">Article and note</string>
+    <string name="back">Back</string>
+    <string name="loading">Loading…</string>
+    <string name="retry">Try again</string>
+    <string name="note_label">Your note</string>
+    <string name="note_required">Enter a non-empty note.</string>
+    <string name="save">Save</string>
+    <string name="saving">Saving…</string>
+    <string name="saved">Saved</string>
+    <string name="error_connection">Unable to connect to the server.</string>
+    <string name="error_timeout">The server did not respond in time.</string>
+    <string name="error_http">The server returned an error.</string>
+    <string name="error_response">The server response is invalid.</string>
+    <string name="error_not_found">Article not found.</string>
+    <string name="error_article_id">Invalid article ID.</string>
+    <string name="error_note_read">Unable to read the note. Try again.</string>
+    <string name="error_note_save">Unable to save the note. Try again using the Save button.</string>
+</resources>

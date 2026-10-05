@@ -1,0 +1,12 @@
+root = true
+
+# Editor defaults only. Spotless/ktfmt in build.gradle.kts owns Kotlin formatting
+# and does not read .editorconfig. Keep these values aligned with that profile.
+[*.{kt,kts}]
+charset = utf-8
+end_of_line = lf
+indent_style = space
+indent_size = 4
+max_line_length = 100
+insert_final_newline = true
+trim_trailing_whitespace = true

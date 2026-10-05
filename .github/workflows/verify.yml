@@ -1,0 +1,65 @@
+name: Verify
+
+on:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  android:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '25'
+      - uses: gradle/actions/setup-gradle@v4
+      - name: Prepare declared Android SDK packages (CI only)
+        run: sdkmanager "platforms;android-37" "build-tools;36.0.0"
+      - name: Format, common behavior and Android host
+        run: ./gradlew spotlessCheck :shared:testAndroidHostTest :androidApp:assembleDebug :shared:lintAndroidMain :androidApp:lintDebug
+
+  ios:
+    runs-on: macos-26
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '25'
+      - uses: gradle/actions/setup-gradle@v4
+      - name: Require planned arm64 host
+        run: test "$(uname -m)" = arm64
+      - name: Select preinstalled iOS simulator
+        id: simulator
+        shell: bash
+        run: |
+          xcrun simctl list devices available --json > "$RUNNER_TEMP/simulators.json"
+          python3 - "$RUNNER_TEMP/simulators.json" "$GITHUB_OUTPUT" <<'PY'
+          import json, sys
+          devices = json.load(open(sys.argv[1]))["devices"]
+          candidates = [(runtime, device) for runtime, items in devices.items()
+                        if ".iOS-" in runtime for device in items
+                        if device.get("isAvailable") and device["name"].startswith("iPhone")]
+          if not candidates:
+              raise SystemExit("No preinstalled iPhone simulator/runtime available")
+          runtime, device = sorted(candidates, key=lambda item: (item[0], item[1]["name"]))[-1]
+          print(f"Selected runtime={runtime} name={device['name']} UUID={device['udid']} state={device['state']}")
+          with open(sys.argv[2], "a") as output:
+              output.write(f"uuid={device['udid']}\nstate={device['state']}\n")
+          PY
+      - name: Boot selected simulator (CI only)
+        env:
+          IOS_TEST_DEVICE: ${{ steps.simulator.outputs.uuid }}
+          IOS_TEST_STATE: ${{ steps.simulator.outputs.state }}
+        run: |
+          if [ "$IOS_TEST_STATE" != Booted ]; then xcrun simctl boot "$IOS_TEST_DEVICE"; fi
+          xcrun simctl bootstatus "$IOS_TEST_DEVICE" -b
+      - name: Common and iOS persistence tests
+        env:
+          IOS_TEST_DEVICE: ${{ steps.simulator.outputs.uuid }}
+        run: ./gradlew :shared:compileKotlinIosSimulatorArm64 :shared:iosSimulatorArm64Test -PiosTestDevice="$IOS_TEST_DEVICE"
+      - name: Unsigned iOS simulator host
+        run: xcodebuild -project iosApp/iosApp.xcodeproj -scheme iosApp -configuration Debug -sdk iphonesimulator -destination 'generic/platform=iOS Simulator' CODE_SIGNING_ALLOWED=NO build

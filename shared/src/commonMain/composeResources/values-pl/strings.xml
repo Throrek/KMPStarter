@@ -1,0 +1,21 @@
+<resources>
+    <string name="articles_title">Artykuły</string>
+    <string name="articles_empty">Brak artykułów.</string>
+    <string name="details_title">Artykuł i notatka</string>
+    <string name="back">Wstecz</string>
+    <string name="loading">Ładowanie…</string>
+    <string name="retry">Spróbuj ponownie</string>
+    <string name="note_label">Twoja notatka</string>
+    <string name="note_required">Wpisz niepustą notatkę.</string>
+    <string name="save">Zapisz</string>
+    <string name="saving">Zapisywanie…</string>
+    <string name="saved">Zapisano</string>
+    <string name="error_connection">Nie można połączyć się z serwerem.</string>
+    <string name="error_timeout">Serwer nie odpowiedział na czas.</string>
+    <string name="error_http">Serwer zwrócił błąd.</string>
+    <string name="error_response">Odpowiedź serwera jest nieprawidłowa.</string>
+    <string name="error_not_found">Nie znaleziono artykułu.</string>
+    <string name="error_article_id">Nieprawidłowy identyfikator artykułu.</string>
+    <string name="error_note_read">Nie udało się odczytać notatki. Spróbuj ponownie.</string>
+    <string name="error_note_save">Nie udało się zapisać notatki. Spróbuj ponownie przyciskiem Zapisz.</string>
+</resources>

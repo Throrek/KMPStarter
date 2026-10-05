@@ -1,0 +1,12 @@
+.gradle/
+.kotlin/
+**/build/
+local.properties
+.idea/
+*.iml
+.DS_Store
+iosApp/DerivedData/
+**/xcuserdata/
+*.xcuserstate
+.superpowers/
+/gradle/gradle-daemon-jvm.properties
